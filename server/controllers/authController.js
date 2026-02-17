@@ -12,7 +12,7 @@ const registerUser = async (req, res, next) => {
   }
   /* Check for the valid inputs */
 
-  if (doesUserExist({ name, email, password })) {
+  if (await doesUserExist({ name, email, password })) {
     res.status(400).json({ message: "User already exists" });
   }
   /* Check if the user already exists */

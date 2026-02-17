@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema(
 const userModel = mongoose.model("User", userSchema);
 
 const doesUserExist = async ({ name, email, hashedPassword }) => {
-  const userExists = userModel.findOne({ email: email });
+  const userExists = await userModel.findOne({ email: email });
   if (userExists) {
     return true;
   } else {
