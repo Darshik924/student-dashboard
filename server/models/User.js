@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const badgesSchema = mongoose.Schema({
   firstTask: { type: Boolean, default: false },
-  isLevel10: { type: Boolean, required: true },
-  studyMonk: { type: Boolean, required: true },
+  isLevel10: { type: Boolean, default: false },
+  studyMonk: { type: Boolean, default: false },
   /* 14 days streak */
-  disciplineKing: { type: Boolean, required: true },
+  disciplineKing: { type: Boolean, default: false },
   /* 30 days streak */
-  earlyBird: { type: Boolean, required: true },
+  earlyBird: { type: Boolean, default: false },
   /* Complete 5 tasks before 10 AM */
 });
 
@@ -29,4 +29,28 @@ const userSchema = mongoose.Schema(
 
 const userModel = mongoose.model("User", userSchema);
 
+const doesUserExist = async ({ name, email, hashedPassword }) => {
+  const userExists = userModel.findOne({ email: email });
+  if (userExists) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const createStdDoc = async ({ name, email, hashedPassword }) => {
+  try {
+    const userSave = new userModel({
+      name: name,
+      email: email,
+      password: hashedPassword,
+    });
+    const result = await userSave.save();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { createStdDoc, doesUserExist };
 export default userModel;

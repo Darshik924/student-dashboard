@@ -1,0 +1,3 @@
+1> Always first start with the backend and test every single api routes and stuff using thunderclient
+2> Start with the DB, Make a perfect Schema and start with storing some data in DB
+3> Then start with routing and always first do the auth routing
