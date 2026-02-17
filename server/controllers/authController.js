@@ -21,7 +21,7 @@ const registerUser = async (req, res, next) => {
   const hashedPassword = await bcrypt.hash(password, salt);
   /* Hash the password */
 
-  const user = createStdDoc({ name, email, hashedPassword });
+  const user = await createStdDoc({ name, email, hashedPassword });
 
   res.status(201).json({ _id: user._id, name: user.name, email: user.email });
   next();
