@@ -52,5 +52,5 @@ const createStdDoc = async ({ name, email, hashedPassword }) => {
   }
 };
 
-export { createStdDoc, doesUserExist };
+export { createStdDoc, doesUserExist, userModel };
 export default userModel;

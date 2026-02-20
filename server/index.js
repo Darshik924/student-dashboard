@@ -1,6 +1,9 @@
 import express from "express";
 import { connectDb } from "./Db/dbConnection.js";
 import authRoutes from "./routes/authRoutes.js";
+import dotenv from "dotenv";
+import router from "./routes/routes.js";
+dotenv.config();
 
 const expApp = express();
 expApp.use(express.json());
@@ -11,7 +14,7 @@ const dbUrl =
 connectDb(dbUrl);
 
 expApp.use("/api/auth", authRoutes);
-
+expApp.use("/", router);
 
 expApp.get("/", (req, res) => {
   res.status(201).json({ message: "OKAY" });
