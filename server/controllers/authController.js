@@ -49,21 +49,20 @@ const loginUser = async (req, res, next) => {
   }
 
   /* Now everything is correct */
-
-  res.status(200).json({
-    message: "Login Successful",
-    _id: user._id,
-    name: user.name,
-    email: email,
-  });
-
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 
-
-
-  next();
+  // 5️⃣ Send token to client
+  res.status(200).json({
+    message: "Login Successful",
+    token,
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    },
+  });
 };
 
 export { registerUser, loginUser };
