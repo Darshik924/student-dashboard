@@ -1,24 +1,54 @@
 import { IoHome } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
+import { GiArchiveRegister } from "react-icons/gi";
+import { IoLogInOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
+import { useState } from "react";
+import { ImProfile } from "react-icons/im";
 
 const Navbar = () => {
+  const [isLoggedIn] = useState<Boolean>(false);
+
   const navItem: string =
-    "text-lg flex gap-2 text-white border-yellow-400 hover:border-pink-400 transition-duration-300 font-bold p-2 border-4 rounded-2xl bg-purple-900 hover:cursor-pointer hover:bg-purple-800";
+    "text-lg flex gap-2 text-white border-yellow-400 hover:border-red-500 hover:text-red-600 transition-duration-600 font-bold p-2 border-3 rounded-2xl bg-purple-700 hover:cursor-pointer hover:bg-purple-900 h-full";
+  const iconStyles: string = "h-6 w-6 font-bold text-white";
 
   return (
-    <nav className="fixed font-sans shadow-md  t-0 l-0 bg-purple-700 h-18 w-full flex justify-between">
+    <nav className="fixed font-sans shadow-md  t-0 l-0 bg-linear-to-r from-purple-500/80 to-blue-500 h-16 w-full flex justify-between">
       <div className="left ml-20 flex items-center">
-        <ul className="flex justify-between gap-8.5">
+        <ul className="flex justify-between gap-6">
           <li className={navItem}>
-            <IoHome className="h-6 w-6 font-bold text-white "></IoHome> Home
+            <IoHome className={iconStyles} />
+            Home
           </li>
-          <li className={navItem}>Profile</li>
-          <li className={navItem}>Avatars</li>
+          <li className={navItem}>
+            <ImProfile className={iconStyles} />
+            Profile
+          </li>
+          <li className={navItem}>
+            <CgProfile className={iconStyles} />
+            Avatars
+          </li>
         </ul>
       </div>
       <div className="right mr-20 flex flex-col justify-center">
-        <ul className="flex justify-between gap-8.5">
-          <li className={navItem}>Login</li>
-          <li className={navItem}>Sign Up</li>
+        <ul className="flex justify-between gap-6">
+          {isLoggedIn ? (
+            <li className={navItem}>
+              <IoLogOutOutline className={iconStyles} />
+              Logout
+            </li>
+          ) : (
+            <li className={navItem}>
+              <IoLogInOutline className={iconStyles} />
+              Login
+            </li>
+          )}
+
+          <li className={navItem}>
+            <GiArchiveRegister className={iconStyles} />
+            Register
+          </li>
         </ul>
       </div>
     </nav>
