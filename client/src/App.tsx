@@ -8,6 +8,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
+      
 
       <Routes>
         <Route path="/" element={<Navigate to="/avatars" />} />
