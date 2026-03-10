@@ -18,18 +18,22 @@ const Navbar = () => {
     <nav className="fixed font-sans shadow-xl t-0 l-0 bg-linear-to-r from-purple-700 to-blue-700 h-16 w-full flex justify-between">
       <div className="left ml-20 flex items-center">
         <ul className="flex justify-between gap-6">
-          <li className={navItem}>
-            <IoHome className={iconStyles} />
-            Home
-          </li>
+          <Link to="/">
+            <li className={navItem}>
+              <IoHome className={iconStyles} />
+              Home
+            </li>
+          </Link>
           <li className={navItem}>
             <ImProfile className={iconStyles} />
             Profile
           </li>
-          <li className={navItem}>
-            <CgProfile className={iconStyles} />
-            Avatars
-          </li>
+          <Link to="/avatars">
+            <li className={navItem}>
+              <CgProfile className={iconStyles} />
+              Avatars
+            </li>
+          </Link>
         </ul>
       </div>
       <div className="right mr-20 flex flex-col justify-center">

@@ -1,15 +1,14 @@
 import React from "react";
 
 const Register = () => {
-    
-    const handleSubmit = (): void => {};
+  const handleSubmit = (): void => {};
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {};
 
   return (
     <main className="pt-16 min-h-screen bg-linear-to-r from-pink-400/80 to-indigo-500/80 flex justify-center items-center ">
       <div className="flex flex-col items-center text-center max-w-4xl p-8 border-4 border-pink-200 absolute z-20 rounded-3xl bg-linear-to-r from-indigo-800 to-purple-900 ">
-        <h1 className="text-6xl font-bold text-white tracking-tight leading-tight">
-          Register Your Name to the Site
+        <h1 className="text-5xl font-bold text-red-200 tracking-tight leading-tight">
+          Register Your Account
         </h1>
 
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-5">

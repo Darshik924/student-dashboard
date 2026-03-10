@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <main className="pt-16 min-h-screen bg-linear-to-r from-pink-400/80 to-indigo-500/80 flex justify-center items-center ">
       <div className="flex flex-col items-center text-center max-w-4xl p-8 border-4 border-pink-200 absolute z-20 rounded-3xl bg-linear-to-r from-indigo-800 to-purple-900 ">
-        <h1 className="text-6xl font-bold text-white tracking-tight leading-tight">
+        <h1 className="text-5xl font-bold text-red-200 tracking-tight leading-tight">
           Login In to your account
         </h1>
 
