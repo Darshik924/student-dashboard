@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
+import userModel from "./User.js";
 
 const taskSchema = mongoose.Schema({
-  userId: { type: Number, required: true },
+  userName: { type: String, required: true, trim: true },
   tasks: [
     {
       id: { type: Number, required: true },
-      title: { type: String, required: true, unique: true },
+      title: { type: String, required: true },
       desc: { type: String, default: "", trim: true },
     },
   ],
@@ -13,3 +14,36 @@ const taskSchema = mongoose.Schema({
 
 const taskModel = mongoose.model("Task", taskSchema);
 
+const createTask = async ({ userName, task }) => {
+  try {
+    let userTasks = await taskModel.findOne({ userName });
+
+    if (!userTasks) {
+      userTasks = await taskModel.insertOne({
+        userName,
+        tasks: [task],
+      });
+
+      return userTasks;
+    }
+
+    userTasks.tasks.push(task);
+    await userTasks.save();
+
+    return userTasks;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const doesTaskExists = async ({ userName, task }) => {
+  const userTasks = await taskModel.findOne({ userName });
+
+  if (!userTasks) return false;
+
+  return userTasks.tasks.find((t) => t.title === task.title);
+};
+
+export { createTask, doesTaskExists };
+
+export default taskModel;

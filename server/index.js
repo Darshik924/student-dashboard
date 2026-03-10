@@ -3,6 +3,7 @@ import { connectDb } from "./Db/dbConnection.js";
 import authRoutes from "./routes/authRoutes.js";
 import dotenv from "dotenv";
 import router from "./routes/routes.js";
+import { taskRouter } from "./routes/taskRoutes.js";
 dotenv.config();
 
 const expApp = express();
@@ -14,6 +15,7 @@ connectDb(dbUrl);
 
 expApp.use("/api/auth", authRoutes);
 expApp.use("/", router);
+expApp.use("/tasks", taskRouter);
 
 expApp.get("/", (req, res) => {
   res.status(201).json({ message: "OKAY" });
