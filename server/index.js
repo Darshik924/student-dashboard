@@ -7,9 +7,8 @@ dotenv.config();
 
 const expApp = express();
 expApp.use(express.json());
-const port = process.env.PORT || 7890;
-const dbUrl =
-  process.env.DB_URL || "mongodb://127.0.0.1:27017/student-dashboard";
+const port = process.env.PORT;
+const dbUrl = process.env.DB_URL;
 
 connectDb(dbUrl);
 
