@@ -3,7 +3,7 @@ import type { propsType } from "../Types/propsType";
 
 const AvatarSlot: FC<propsType> = ({ imgSrc }) => {
   return (
-    <div className="h-72 w-60 border-4 border-purple-950 bg-white rounded-3xl cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-105 hover:border-pink-500">
+    <div className="h-72 w-60 border-7 border-purple-950 bg-white rounded-3xl cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-110 hover:border-pink-500">
       <img
         className="h-full w-full object-cover"
         src={imgSrc}

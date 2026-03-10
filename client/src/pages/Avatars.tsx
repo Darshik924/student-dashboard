@@ -27,10 +27,8 @@ const Avatars = () => {
     I0ayano,
   ];
 
-  
-
   const handleAvatarSelection = (): void => {
-    console.log("")
+    console.log("");
   };
 
   return (
@@ -48,7 +46,7 @@ const Avatars = () => {
 
         <button
           onClick={handleAvatarSelection}
-          className="p-2 font-bold font-sans text-white hover:bg-yellow-400 bg-purple-800 w-fit mx-auto rounded-2xl text-xl cursor-pointer mb-10"
+          className="p-3 transition duration-100 font-bold font-sans text-white hover:bg-yellow-400 bg-purple-800 w-fit mx-auto rounded-2xl text-xl cursor-pointer mb-10"
         >
           Select And Proceed
         </button>
