@@ -10,7 +10,7 @@ const protect = async (req, res, next) => {
   ) {
     try {
       /* Extract token */
-      token = req.headers.authorization.split(" ")[1]; 
+      token = req.headers.authorization.split(" ")[1];
       /* Token is something like: Bearer oebnfjiwbfowef */
 
       /* Verify Token  */
@@ -19,7 +19,11 @@ const protect = async (req, res, next) => {
       /* Attach user to request */
       req.user = await userModel.findById(decoded.id).select("-password");
 
+      console.log("Token received:", token);
+      console.log("Decoded payload:", decoded);
+
       next();
+      return;
     } catch (err) {
       return res.status(401).json({ message: "Not authorized" });
     }

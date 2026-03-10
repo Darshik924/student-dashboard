@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
-import userModel from "./User.js";
+
+const schemaforEach = mongoose.Schema(
+  {
+    id: { type: Number, required: true },
+    title: { type: String, required: true },
+    desc: { type: String, default: "", trim: true },
+    deadline: { type: Date, required: true },
+  },
+  { timestamps: true },
+);
 
 const taskSchema = mongoose.Schema({
   userName: { type: String, required: true, trim: true },
-  tasks: [
-    {
-      id: { type: Number, required: true },
-      title: { type: String, required: true },
-      desc: { type: String, default: "", trim: true },
-    },
-  ],
+  tasks: [schemaforEach],
 });
 
 const taskModel = mongoose.model("Task", taskSchema);
