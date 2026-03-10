@@ -5,6 +5,7 @@ import { IoLogInOutline } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useState } from "react";
 import { ImProfile } from "react-icons/im";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn] = useState<Boolean>(false);
@@ -14,7 +15,7 @@ const Navbar = () => {
   const iconStyles: string = "h-6 w-6 font-bold text-white";
 
   return (
-    <nav className="fixed font-sans shadow-md  t-0 l-0 bg-linear-to-r from-purple-500/80 to-blue-500 h-16 w-full flex justify-between">
+    <nav className="fixed font-sans shadow-xl t-0 l-0 bg-linear-to-r from-purple-700 to-blue-700 h-16 w-full flex justify-between">
       <div className="left ml-20 flex items-center">
         <ul className="flex justify-between gap-6">
           <li className={navItem}>
@@ -39,16 +40,19 @@ const Navbar = () => {
               Logout
             </li>
           ) : (
-            <li className={navItem}>
-              <IoLogInOutline className={iconStyles} />
-              Login
-            </li>
+            <Link to="/login">
+              <li className={navItem}>
+                <IoLogInOutline className={iconStyles} />
+                Login
+              </li>
+            </Link>
           )}
-
-          <li className={navItem}>
-            <GiArchiveRegister className={iconStyles} />
-            Register
-          </li>
+          <Link to="/register">
+            <li className={navItem}>
+              <GiArchiveRegister className={iconStyles} />
+              Register
+            </li>
+          </Link>
         </ul>
       </div>
     </nav>
