@@ -9,6 +9,7 @@ interface registerDataType {
   email: string;
   password: string;
   name: string;
+  avatar: string | null;
 }
 
 interface loginDataType {

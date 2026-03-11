@@ -3,10 +3,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const registerUser = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, avatar } = req.body;
   /* Extract the Input  */
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !avatar) {
     return res.status(400).json({
       message: "All fields are Required!",
     });
@@ -22,7 +22,7 @@ const registerUser = async (req, res, next) => {
   const hashedPassword = await bcrypt.hash(password, salt);
   /* Hash the password */
 
-  const user = await createStdDoc({ name, email, hashedPassword });
+  const user = await createStdDoc({ name, email, hashedPassword, avatar });
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "30d",

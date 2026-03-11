@@ -8,6 +8,7 @@ const Register = () => {
     email: "",
     name: "",
     password: "",
+    avatar: localStorage.getItem("selectedAvatar"),
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +38,7 @@ const Register = () => {
         setError(data.message || "User Already Exists");
         return;
       }
-      
+
       if (data.message === "ALL NOT GIVEN") {
         setError(data.message);
         return;

@@ -14,6 +14,7 @@ const badgesSchema = mongoose.Schema({
 const userSchema = mongoose.Schema({
   name: { type: String, required: true, trim: true },
   email: { type: String, required: true, trim: true, unique: true },
+  avatar: { type: String, required: true },
   /* Unique emails we should have */
   password: { type: String, required: true },
   /* Password must always be required */
@@ -26,7 +27,7 @@ const userSchema = mongoose.Schema({
 
 const userModel = mongoose.model("User", userSchema);
 
-const doesUserExist = async ({ name, email, hashedPassword }) => {
+const doesUserExist = async ({ email }) => {
   const userExists = await userModel.findOne({ email: email });
   if (userExists) {
     return true;
@@ -35,12 +36,13 @@ const doesUserExist = async ({ name, email, hashedPassword }) => {
   }
 };
 
-const createStdDoc = async ({ name, email, hashedPassword }) => {
+const createStdDoc = async ({ name, email, hashedPassword, avatar }) => {
   try {
     const userSave = new userModel({
       name: name,
       email: email,
       password: hashedPassword,
+      avatar: avatar,
     });
     const result = await userSave.save();
     return result;
