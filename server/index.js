@@ -4,10 +4,17 @@ import authRoutes from "./routes/authRoutes.js";
 import dotenv from "dotenv";
 import router from "./routes/routes.js";
 import { taskRouter } from "./routes/taskRoutes.js";
+import cors from "cors";
 dotenv.config();
 
 const expApp = express();
 expApp.use(express.json());
+expApp.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  }),
+);
 const port = process.env.PORT;
 const dbUrl = process.env.DB_URL;
 

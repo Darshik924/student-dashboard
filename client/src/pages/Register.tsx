@@ -39,6 +39,7 @@ const Register = () => {
       console.log("Registered User:", data);
     } catch (err) {
       setError("Server Error. Please Try Again");
+      console.log(err);
     } finally {
       setLoading(false);
     }
