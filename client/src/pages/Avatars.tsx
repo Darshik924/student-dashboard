@@ -13,7 +13,9 @@ import I9eren from "../assets/avatars/9_eren.jpg";
 import I0ayano from "../assets/avatars/0_ayano.jpg";
 
 const Avatars = () => {
-  const [selectedAvatar, setAvatar] = useState<string | null>(null);
+  const [selectedAvatar, setAvatar] = useState<string>(
+    "/src/assets/avatars/1_killua.jpg",
+  );
 
   const navigate = useNavigate();
   const premiumAvatars = [I0ayano, I2urahara, I4jinwoo, I6gojo];

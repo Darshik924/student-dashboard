@@ -12,9 +12,15 @@ interface registerDataType {
   avatar: string | null;
 }
 
+interface authContextTypes {
+  isLoggedIn: boolean;
+  login: (token: string) => void;
+  logout: () => void;
+}
+
 interface loginDataType {
   email: string;
   password: string;
 }
 
-export type { propsType, registerDataType, loginDataType };
+export type { propsType, registerDataType, loginDataType, authContextTypes };

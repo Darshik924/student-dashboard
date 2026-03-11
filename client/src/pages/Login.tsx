@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import type { loginDataType } from "../Types/propsType";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../components/useAuth";
 
 const Login = () => {
+  const { login } = useAuth();
+
   const navigate = useNavigate();
   const [formData, setData] = useState<loginDataType>({
     email: "",
@@ -36,8 +39,8 @@ const Login = () => {
       console.log("Login In Successful:", data.user);
 
       if (data.token) {
-        localStorage.setItem("token", data.token);
-        navigate("/dashboard");
+        login(data.token);
+        navigate("/");
       }
     } catch (err) {
       setError("Server Error, Please Try Again");

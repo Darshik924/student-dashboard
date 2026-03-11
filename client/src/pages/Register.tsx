@@ -50,7 +50,7 @@ const Register = () => {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
-        navigate("/dashboard");
+        navigate("/");
       }
     } catch (err) {
       setError("Server Error. Please Try Again");
