@@ -34,7 +34,10 @@ const Navbar = () => {
           {isLoggedIn && user ? (
             <li>
               <Link to="/profile" className={navItem}>
-                <img src={user.avatar} className="h-8 w-8 rounded-full" />
+                <img
+                  src={user.avatar}
+                  className="h-8 w-8 rounded-full border-2 border-amber-400"
+                />
                 {user.name}
               </Link>
             </li>
