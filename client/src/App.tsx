@@ -6,6 +6,7 @@ import Avatars from "./pages/Avatars";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import AvatarProtectionRoute from "./pages/AvatarProtectionRoute";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -24,6 +25,15 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />

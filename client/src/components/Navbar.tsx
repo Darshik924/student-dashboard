@@ -1,4 +1,4 @@
-import { IoHome } from "react-icons/io5";
+import { MdDashboard } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { GiArchiveRegister } from "react-icons/gi";
 import { IoLogInOutline } from "react-icons/io5";
@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./useAuth";
 
 const Navbar = () => {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = (): void => {
@@ -26,20 +26,35 @@ const Navbar = () => {
         <ul className="flex justify-between gap-6">
           <li>
             <Link className={navItem} to="/">
-              <IoHome className={iconStyles} />
-              Home
+              <MdDashboard className={iconStyles} />
+              DashBoard
             </Link>
           </li>
-          <li className={navItem}>
-            <ImProfile className={iconStyles} />
-            Profile
-          </li>
-          <li>
-            <Link className={navItem} to="/avatars">
-              <CgProfile className={iconStyles} />
-              Avatars
-            </Link>
-          </li>
+
+          {isLoggedIn && user ? (
+            <li>
+              <Link to="/profile" className={navItem}>
+                <img src={user.avatar} className="h-8 w-8 rounded-full" />
+                {user.name}
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link className={navItem} to="/profile">
+                <ImProfile className={iconStyles} />
+                Profile
+              </Link>
+            </li>
+          )}
+
+          {!isLoggedIn && (
+            <li>
+              <Link className={navItem} to="/avatars">
+                <CgProfile className={iconStyles} />
+                Avatars
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="right mr-20 flex flex-col justify-center">

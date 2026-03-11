@@ -12,10 +12,21 @@ interface registerDataType {
   avatar: string | null;
 }
 
+interface userType {
+  name: string;
+  email: string;
+  avatar: string;
+  password: string;
+  level: number;
+  streak: number;
+  xp: number;
+}
+
 interface authContextTypes {
   isLoggedIn: boolean;
   login: (token: string) => void;
   logout: () => void;
+  user: userType | null;
 }
 
 interface loginDataType {
@@ -23,4 +34,10 @@ interface loginDataType {
   password: string;
 }
 
-export type { propsType, registerDataType, loginDataType, authContextTypes };
+export type {
+  userType,
+  propsType,
+  registerDataType,
+  loginDataType,
+  authContextTypes,
+};
