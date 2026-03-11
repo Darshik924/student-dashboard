@@ -24,7 +24,15 @@ const registerUser = async (req, res, next) => {
 
   const user = await createStdDoc({ name, email, hashedPassword });
 
-  res.status(201).json({ _id: user._id, name: user.name, email: user.email });
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+
+  res.status(201).json({
+    message: "Registration Success",
+    token,
+    user,
+  });
   next();
 };
 

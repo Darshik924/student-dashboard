@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import type { registerDataType } from "../Types/propsType";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setData] = useState<registerDataType>({
     email: "",
     name: "",
@@ -36,7 +38,15 @@ const Register = () => {
         return;
       }
 
-      console.log("Registered User:", data);
+      localStorage.setItem("token", data.token);
+
+      console.log("Registered User:", data.user);
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard");
+      }
+      
     } catch (err) {
       setError("Server Error. Please Try Again");
       console.log(err);
