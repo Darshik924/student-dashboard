@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import type { registerDataType } from "../Types/propsType";
 
 const Register = () => {
-  const handleSubmit = (): void => {};
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {};
+  const [formData, setData] = useState<registerDataType>({
+    email: "",
+    name: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await fetch("http://localhost:7890/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await result.json();
+
+      if (!result.ok) {
+        setError(data.message || "Registration failed");
+        return;
+      }
+
+      if (data.message === "ALL NOT GIVEN") {
+        setError(data.message);
+        return;
+      }
+
+      console.log("Registered User:", data);
+    } catch (err) {
+      setError("Server Error. Please Try Again");
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <main className="pt-16 min-h-screen bg-linear-to-r from-pink-400/80 to-indigo-500/80 flex justify-center items-center ">
@@ -46,7 +89,7 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="userName"
+              name="name"
               placeholder="Your GamerTag"
               required
               className="px-5 py-3 rounded-2xl border-4 border-yellow-100 focus:outline-none focus:border-purple-950 bg-yellow-50/50 transition-colors"
@@ -61,6 +104,22 @@ const Register = () => {
             Register
           </button>
         </form>
+
+        {loading && (
+          <div className="mt-6 flex items-center gap-3 px-6 py-3 rounded-2xl bg-purple-800/60 border-2 border-pink-400 shadow-lg shadow-pink-500/40">
+            <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+
+            <span className="text-white font-semibold text-lg tracking-wide">
+              Creating your account...
+            </span>
+          </div>
+        )}
+
+        {error && (
+          <div className="mt-6 px-6 py-4 rounded-2xl border-2 border-red-400 bg-red-900/70 shadow-lg shadow-red-500/40 text-white text-lg font-semibold animate-pulse">
+            ❌ {error}
+          </div>
+        )}
       </div>
     </main>
   );

@@ -2,6 +2,13 @@ interface propsType {
   imgSrc: string;
   onClick?: () => void;
   isSelected?: boolean;
+  isPremium?: boolean;
 }
 
-export type { propsType };
+interface registerDataType {
+  email: string;
+  password: string;
+  name: string;
+}
+
+export type { propsType, registerDataType };

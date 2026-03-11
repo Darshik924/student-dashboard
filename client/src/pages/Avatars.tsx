@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AvatarSlot from "../components/AvatarSlot";
 import I1killua from "../assets/avatars/1_killua.jpg";
-import I2ai from "../assets/avatars/2_ai.jpg";
+import I2urahara from "../assets/avatars/2_Urahara.jpg";
 import I3hyouka from "../assets/avatars/3_hyouka.jpg";
 import I4jinwoo from "../assets/avatars/4_jinwoo.jpg";
 import I5tanjiro from "../assets/avatars/5_tanjiro.jpg";
@@ -16,9 +16,15 @@ const Avatars = () => {
   const [selectedAvatar, setAvatar] = useState<string | null>(null);
 
   const navigate = useNavigate();
+  const premiumAvatars = [I0ayano, I2urahara, I4jinwoo, I6gojo];
+
+  const determineIsPremium = (avatar: string): boolean => {
+    return premiumAvatars.includes(avatar);
+  };
+
   const avatarsArr = [
     I1killua,
-    I2ai,
+    I2urahara,
     I3hyouka,
     I4jinwoo,
     I5tanjiro,
@@ -30,6 +36,11 @@ const Avatars = () => {
   ];
 
   const handleAvatarSelection = (avatar: string): void => {
+    if (determineIsPremium(avatar)) {
+      alert("This avatar is premium 🔒");
+      return;
+    }
+
     setAvatar(avatar);
     localStorage.setItem("selectedAvatar", avatar);
     console.log(localStorage.getItem("selectedAvatar"));
@@ -42,7 +53,7 @@ const Avatars = () => {
   return (
     <main className="pt-16 min-h-screen bg-linear-to-r from-pink-400/80 to-indigo-500/80 flex justify-center items-center ">
       <div className="flex mt-2 mb-15 flex-col gap-3 justify-between">
-        <h2 className="text-5xl text-white text-center font-bold font-sans border-3 p-4 rounded-3xl border-indigo-400 hover:text-red-500 transition-duration-300 bg-purple-900 shadow-lg shadow-pink-500/40 w-fit mx-auto">
+        <h2 className="text-5xl transition duration-300 text-white text-center font-bold font-sans border-3 p-4 rounded-3xl border-indigo-400 hover:text-red-600 transition-duration-300 bg-purple-900 shadow-lg shadow-pink-500/40 w-fit mx-auto">
           Choose An Avatar
         </h2>
 
@@ -53,6 +64,7 @@ const Avatars = () => {
               imgSrc={avatarImgEle}
               onClick={() => handleAvatarSelection(avatarImgEle)}
               isSelected={selectedAvatar === avatarImgEle}
+              isPremium={determineIsPremium(avatarImgEle)}
             />
           ))}
         </div>
