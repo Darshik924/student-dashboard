@@ -33,6 +33,11 @@ const Register = () => {
         return;
       }
 
+      if (data.message === "User already exists") {
+        setError(data.message || "User Already Exists");
+        return;
+      }
+      
       if (data.message === "ALL NOT GIVEN") {
         setError(data.message);
         return;

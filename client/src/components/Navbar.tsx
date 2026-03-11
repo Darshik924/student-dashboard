@@ -3,12 +3,16 @@ import { CgProfile } from "react-icons/cg";
 import { GiArchiveRegister } from "react-icons/gi";
 import { IoLogInOutline } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
-import { useState } from "react";
 import { ImProfile } from "react-icons/im";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [isLoggedIn] = useState<Boolean>(false);
+  const isLoggedIn = !!localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   const navItem: string =
     "text-lg flex gap-2 text-white border-yellow-400 hover:border-red-500 hover:text-red-600 transition-duration-600 font-bold p-2 border-3 rounded-2xl bg-purple-700 hover:cursor-pointer hover:bg-purple-900 h-full";
@@ -39,24 +43,26 @@ const Navbar = () => {
       <div className="right mr-20 flex flex-col justify-center">
         <ul className="flex justify-between gap-6">
           {isLoggedIn ? (
-            <li className={navItem}>
+            <li onClick={handleLogout} className={navItem}>
               <IoLogOutOutline className={iconStyles} />
               Logout
             </li>
           ) : (
-            <Link to="/login">
-              <li className={navItem}>
-                <IoLogInOutline className={iconStyles} />
-                Login
-              </li>
-            </Link>
+            <>
+              <Link to="/login">
+                <li className={navItem}>
+                  <IoLogInOutline className={iconStyles} />
+                  Login
+                </li>
+              </Link>
+              <Link to="/register">
+                <li className={navItem}>
+                  <GiArchiveRegister className={iconStyles} />
+                  Register
+                </li>
+              </Link>
+            </>
           )}
-          <Link to="/register">
-            <li className={navItem}>
-              <GiArchiveRegister className={iconStyles} />
-              Register
-            </li>
-          </Link>
         </ul>
       </div>
     </nav>
