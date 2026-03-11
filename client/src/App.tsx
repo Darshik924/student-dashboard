@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Avatars from "./pages/Avatars";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import AvatarProtectionRoute from "./pages/AvatarProtectionRoute";
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/avatars" />} />
+        <Route path="/" element={<AvatarProtectionRoute />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
