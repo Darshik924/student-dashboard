@@ -17,8 +17,8 @@ const Navbar = () => {
   };
 
   const navItem: string =
-    "text-lg flex gap-2 text-white border-yellow-400 hover:border-red-500 hover:text-red-600 transition-duration-600 font-bold p-2 border-3 rounded-2xl bg-purple-700 hover:cursor-pointer hover:bg-purple-900 ";
-  const iconStyles: string = "h-6 w-6 font-bold text-white";
+    "text-lg flex gap-2 text-white border-yellow-400 hover:border-red-500 hover:text-yellow-950 transition-duration-600 font-bold p-2 border-3 rounded-2xl bg-teal-800 hover:cursor-pointer hover:bg-amber-700 ";
+  const iconStyles: string = "h-8 w-8 font-bold text-white";
 
   return (
     <nav className="fixed font-sans shadow-xl t-0 l-0 bg-linear-to-r from-purple-700 to-blue-700 h-16 w-full flex justify-between">
