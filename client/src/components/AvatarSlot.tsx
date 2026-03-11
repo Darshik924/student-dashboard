@@ -19,7 +19,7 @@ const AvatarSlot: FC<propsType> = ({
 
       ${
         isSelected
-          ? "border-yellow-400 scale-110 shadow-xl"
+          ? "border-yellow-400 shadow-xl"
           : "border-purple-950 hover:scale-110"
       }`}
     >

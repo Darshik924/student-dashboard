@@ -23,6 +23,7 @@ const userSchema = mongoose.Schema({
   badges: badgesSchema,
   /* We will have a big obj as badges */
   xp: { type: Number, default: 0 },
+  maxXp: { type: Number, default: 1000 },
 });
 
 const userModel = mongoose.model("User", userSchema);

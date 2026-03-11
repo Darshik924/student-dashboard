@@ -20,6 +20,7 @@ interface userType {
   level: number;
   streak: number;
   xp: number;
+  maxXp: number;
 }
 
 interface authContextTypes {

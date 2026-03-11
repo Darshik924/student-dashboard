@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../components/useAuth";
 
 const AvatarProtectionRoute = () => {
-  const token = localStorage.getItem("token");
+  const { isLoggedIn } = useAuth();
 
-  if (!token) {
+  if (!isLoggedIn) {
     return <Navigate to="/avatars" />;
   } else {
     return <Navigate to="/dashboard" />;
