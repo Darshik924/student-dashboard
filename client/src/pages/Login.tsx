@@ -1,8 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import type { loginDataType } from "../Types/propsType";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const handleSubmit = (): void => {};
-  const handleChange = (): void => {};
+  const navigate = useNavigate();
+  const [formData, setData] = useState<loginDataType>({
+    email: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await fetch("http://localhost:7890/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await result.json();
+
+      if (!result.ok) {
+        setError(data.message || "Invalid email or password");
+        return;
+      }
+
+      console.log("Login In Successful:", data.user);
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      setError("Server Error, Please Try Again");
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <main className="pt-16 min-h-screen bg-linear-to-r from-pink-400/80 to-indigo-500/80 flex justify-center items-center ">
@@ -40,12 +86,29 @@ const Login = () => {
             />
           </div>
 
+          {loading && (
+            <div className="mt-6 flex items-center gap-3 px-6 py-3 rounded-2xl bg-purple-800/60 border-2 border-pink-400 shadow-lg shadow-pink-500/40">
+              <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+
+              <span className="text-white font-semibold text-lg tracking-wide">
+                Logging In Please Wait...
+              </span>
+            </div>
+          )}
+
           <button
             type="submit"
-            className="mt-4 hover:text-white bg-pink-600/50 text-white font-bold py-4 rounded-2xl hover:bg-yellow-500/80 active:scale-95 transition-all shadow-lg text-2xl cursor-pointer"
+            disabled={loading}
+            className="mt-4 hover:text-white bg-pink-600/50 text-white font-bold py-4 rounded-2xl hover:bg-yellow-500/80 active:scale-95 transition-all shadow-lg text-2xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Login In
+            {loading ? "Logging In..." : "Login"}
           </button>
+
+          {error && (
+            <div className="mt-6 px-6 py-4 rounded-2xl border-2 border-red-400 bg-red-900/70 shadow-lg shadow-red-500/40 text-white text-lg font-semibold animate-pulse">
+              ❌ {error}
+            </div>
+          )}
         </form>
       </div>
     </main>

@@ -11,4 +11,9 @@ interface registerDataType {
   name: string;
 }
 
-export type { propsType, registerDataType };
+interface loginDataType {
+  email: string;
+  password: string;
+}
+
+export type { propsType, registerDataType, loginDataType };

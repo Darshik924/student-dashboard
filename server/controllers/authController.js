@@ -41,7 +41,7 @@ const loginUser = async (req, res, next) => {
 
   /* Check if they are not empty  */
   if (!email || !password) {
-    return res.status(400).json({ message: "Email or Password is empty" });
+    return res.status(400).json({ message: "ALL NOT GIVEN" });
   }
 
   const user = await userModel.findOne({ email });
@@ -65,11 +65,7 @@ const loginUser = async (req, res, next) => {
   res.status(200).json({
     message: "Login Successful",
     token,
-    user: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-    },
+    user,
   });
 };
 
